@@ -1,0 +1,457 @@
+/* ═══════════════════════════════════════════════════
+   FOODIE — Responsive Styles
+   Mobile-First Breakpoints
+   ═══════════════════════════════════════════════════ */
+
+/* ═══════ Tablet & Below (max-width: 1024px) ═══════ */
+@media (max-width: 1024px) {
+  .hero-container {
+    gap: 40px;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-plate {
+    width: 350px;
+    height: 350px;
+  }
+
+  .about-grid {
+    gap: 50px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .steps-grid {
+    flex-wrap: wrap;
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  .step-card {
+    min-width: calc(50% - 20px);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .review-card {
+    min-width: calc(100% - 0px);
+  }
+
+  .newsletter-card {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-visual {
+    display: none;
+  }
+
+  .newsletter-content {
+    padding: 50px;
+  }
+}
+
+/* ═══════ Mobile Nav (max-width: 768px) ═══════ */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 70px;
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-primary);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-link {
+    font-size: 1.3rem;
+    padding: 14px 30px;
+  }
+
+  .auth-btn span {
+    display: none;
+  }
+
+  .auth-btn {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+  }
+
+  /* Hero */
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 30px;
+  }
+
+  .hero-title {
+    font-size: 2.8rem;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-cta {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    min-height: 350px;
+    order: -1;
+  }
+
+  .hero-plate {
+    width: 280px;
+    height: 280px;
+  }
+
+  .floating-card.card-1 {
+    top: 5%;
+    right: 0%;
+  }
+
+  .floating-card.card-2 {
+    bottom: 15%;
+    left: 2%;
+  }
+
+  .floating-card.card-3 {
+    bottom: 5%;
+    right: 5%;
+  }
+
+  .hero-scroll-indicator {
+    display: none;
+  }
+
+  /* About */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .about-experience-badge {
+    bottom: -20px;
+    right: 10px;
+    padding: 20px;
+  }
+
+  .exp-number {
+    font-size: 2rem;
+  }
+
+  .about-img-main img {
+    height: 350px;
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stats-number {
+    font-size: 2.2rem;
+  }
+
+  /* Menu */
+  .menu-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .menu-tabs {
+    gap: 8px;
+  }
+
+  .menu-tab {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  .menu-card-img {
+    height: 180px;
+  }
+
+  .menu-card-body {
+    padding: 18px;
+  }
+
+  /* CTA */
+  .cta-banner {
+    padding: 70px 0;
+  }
+
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+
+  /* Steps */
+  .step-card {
+    min-width: calc(50% - 10px);
+    padding: 28px 20px;
+  }
+
+  /* Reviews */
+  .review-card {
+    padding: 30px;
+    min-width: 100%;
+  }
+
+  /* Newsletter */
+  .newsletter-content {
+    padding: 36px;
+  }
+
+  .newsletter-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .newsletter-form .form-group {
+    flex-direction: column;
+  }
+
+  .newsletter-form .btn {
+    width: 100%;
+  }
+
+  /* Footer */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  /* Cart Drawer */
+  .cart-drawer {
+    width: 100%;
+    right: -100%;
+  }
+
+  /* Modals */
+  .auth-modal,
+  .order-modal,
+  .success-modal {
+    padding: 36px 28px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  /* Toast */
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .toast {
+    min-width: auto;
+    width: 100%;
+  }
+
+  /* Back to Top */
+  .back-to-top {
+    left: auto;
+    right: 16px;
+    bottom: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ═══════ Small Mobile (max-width: 480px) ═══════ */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stat-divider {
+    width: 40px;
+    height: 1px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
+
+  .hero-plate {
+    width: 240px;
+    height: 240px;
+  }
+
+  .floating-card {
+    display: none;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-item {
+    padding: 20px 10px;
+  }
+
+  .stats-number {
+    font-size: 1.8rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-card-img {
+    height: 200px;
+  }
+
+  .step-card {
+    min-width: 100%;
+  }
+
+  .steps-grid {
+    flex-direction: column;
+  }
+
+  .cta-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .review-card {
+    padding: 24px;
+  }
+
+  .review-text {
+    font-size: 0.95rem;
+  }
+
+  .newsletter-content {
+    padding: 28px 24px;
+  }
+
+  .newsletter-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .auth-modal,
+  .order-modal,
+  .success-modal {
+    padding: 30px 22px;
+  }
+
+  .order-status-timeline {
+    padding: 0;
+  }
+
+  .timeline-step span {
+    font-size: 0.65rem;
+  }
+
+  .timeline-dot {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* ═══════ Very Small Screens (max-width: 360px) ═══════ */
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.9rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .about-feature {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .menu-tab {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  .menu-tab i {
+    display: none;
+  }
+}
