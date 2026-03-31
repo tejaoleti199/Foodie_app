@@ -1,0 +1,73 @@
+# ═══════════════════════════════════════════════════════
+# Foodie — Docker Compose Configuration
+# Services: Frontend (Nginx), Backend (Node.js), MongoDB
+# ═══════════════════════════════════════════════════════
+
+version: '3.8'
+
+services:
+  # ─────────── Frontend (Nginx) ───────────
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: foodie-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - foodie-network
+    restart: unless-stopped
+
+  # ─────────── Backend (Node.js API) ───────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: foodie-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo:27017/foodie
+      - JWT_SECRET=foodie_jwt_secret_key_2024_super_secure
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - foodie-network
+    restart: unless-stopped
+
+  # ─────────── MongoDB Database ───────────
+  mongo:
+    image: mongo:7-jammy
+    container_name: foodie-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - foodie-network
+    restart: unless-stopped
+
+# ─────────── Named Volumes (Data Persistence) ───────────
+volumes:
+  mongo-data:
+    driver: local
+  mongo-config:
+    driver: local
+
+# ─────────── Network ───────────
+networks:
+  foodie-network:
+    driver: bridge

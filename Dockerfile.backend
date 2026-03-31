@@ -1,0 +1,57 @@
+# ═══════════════════════════════════════════════════════
+# Foodie Backend — Multi-Stage Dockerfile
+# Stage 1: Install production dependencies
+# Stage 2: Minimal production image with non-root user
+# ═══════════════════════════════════════════════════════
+
+# ---------- Stage 1: Dependencies ----------
+FROM node:20-alpine AS builder
+
+LABEL stage="builder"
+WORKDIR /app
+
+# Copy package files first (leverages Docker layer caching)
+COPY backend/package.json backend/package-lock.json ./
+
+# Install ONLY production dependencies (excludes mongodb-memory-server dev dep)
+RUN npm ci --omit=dev && \
+    npm cache clean --force
+
+# ---------- Stage 2: Production ----------
+FROM node:20-alpine AS production
+
+LABEL maintainer="tejaoleti199"
+LABEL description="Foodie - Premium Food Ordering Backend API"
+
+# Set Node environment
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+# Create a non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S foodie -u 1001 -G nodejs
+
+# Copy production dependencies from builder stage
+COPY --from=builder --chown=foodie:nodejs /app/node_modules ./node_modules
+
+# Copy server source code
+COPY --chown=foodie:nodejs backend/config/ ./config/
+COPY --chown=foodie:nodejs backend/models/ ./models/
+COPY --chown=foodie:nodejs backend/routes/ ./routes/
+COPY --chown=foodie:nodejs backend/middleware/ ./middleware/
+COPY --chown=foodie:nodejs backend/seed.js ./
+COPY --chown=foodie:nodejs backend/server.js ./
+
+# Switch to non-root user
+USER foodie
+
+# Expose the API port
+EXPOSE 3000
+
+# Health check for container orchestration
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1
+
+# Start the server
+CMD ["node", "server.js"]
