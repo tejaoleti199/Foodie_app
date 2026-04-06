@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: foodie-backend:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "3000"
+        - name: MONGODB_URI
+          # Currently pointing to the MongoDB Atlas cluster that was configured
+          # To use the local mongodb instead: value: "mongodb://mongodb-service:27017/foodie"
+          value: "mongodb+srv://teja:OletiTeja199@cluster0.jmf321n.mongodb.net/foodie?appName=Cluster0"
+        - name: JWT_SECRET
+          value: "foodie_jwt_secret_key_2024_super_secure"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
