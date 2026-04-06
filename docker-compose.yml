@@ -32,7 +32,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-      - MONGODB_URI=mongodb://mongo:27017/foodie
+      - MONGODB_URI=mongodb+srv://teja:OletiTeja199@cluster0.jmf321n.mongodb.net/foodie?appName=Cluster0
       - JWT_SECRET=foodie_jwt_secret_key_2024_super_secure
     depends_on:
       mongo:
