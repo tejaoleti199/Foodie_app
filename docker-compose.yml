@@ -3,7 +3,7 @@
 # Services: Frontend (Nginx), Backend (Node.js), MongoDB
 # ═══════════════════════════════════════════════════════
 
-version: '3.8'
+
 
 services:
   # ─────────── Frontend (Nginx) ───────────
